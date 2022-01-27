@@ -13,6 +13,12 @@ import {
   Title,
 } from '../styles/LocationInfo.css';
 
+/**
+ * Component rendering the individual location info of circle in the map.
+ *
+ * @param props
+ * @returns {CustomElement}
+ */
 export function LocationInfo(props: LocationInfoInterface) {
   const { longitude, latitude, locationNumber } = props;
 
