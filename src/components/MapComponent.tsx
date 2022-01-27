@@ -1,21 +1,16 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import Map from 'ol/Map';
-import { Feature } from 'ol';
-import Circle from 'ol/geom/Circle';
-import { fromLonLat } from 'ol/proj';
-import Vector from 'ol/layer/Vector';
-import { Style, Stroke } from 'ol/style';
-import { Vector as SourceVector } from 'ol/source';
+
+import useDrawCirlces from '../hooks/useDrawCircles';
 
 import { MapContainer } from '../styles/MapComponent.css';
-
-import config from '../config';
 
 import MapInstanceSingleton from '../services/MapInstance';
 
 import { isEmpty as isArrayEmpty } from '../utils/array';
 import { isEmpty as isObjectEmpty } from '../utils/object';
+import { MapComponentPropsInterface } from '../interface/MapComponentInterface';
 
 /**
  * Function gets the instance of the map.
@@ -34,25 +29,15 @@ function getMapInstance(reference: HTMLDivElement) {
  *
  * @returns {CustomElements}
  */
-function MapComponent() {
+function MapComponent(props: MapComponentPropsInterface) {
   const mapDivRef = useRef<HTMLInputElement>(null);
 
-  const [mapCircles, setMapCircles] = useState({ locations: [] });
+  const { markers: mapCircles } = props;
 
-  useEffect(() => {
-    fetch(config.apiUrl, {
-      method: 'get',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((res) => res.json())
-      .then((response) => {
-        setMapCircles(response);
-      })
-      .catch((error) => console.log(error));
-  }, []);
-
+  /**
+   * Invoked when their is change in the value of reference variable
+   * mapDivRef.
+   */
   useEffect(() => {
     if (!mapDivRef.current) {
       return;
@@ -61,6 +46,11 @@ function MapComponent() {
     getMapInstance(mapDivRef.current);
   }, [mapDivRef]);
 
+  /**
+   * Invoked when the values for the mapCircles is updated.
+   *
+   * mapCircles hold the location to display circles in map.
+   */
   useEffect(() => {
     if (!isObjectEmpty(mapCircles) && !isArrayEmpty(mapCircles.locations)) {
       if (!mapDivRef.current) {
@@ -68,25 +58,8 @@ function MapComponent() {
       }
 
       const mapInstance = getMapInstance(mapDivRef.current);
-      const markers = new SourceVector({
-        features: mapCircles.locations.map(
-          (location: Array<number>) =>
-            new Feature(new Circle(fromLonLat(location.reverse()), 25))
-        ),
-      });
-      const vectorLayer = new Vector({
-        source: markers,
-        style: [
-          new Style({
-            stroke: new Stroke({
-              color: '#42c8f5',
-              width: 2,
-            }),
-          }),
-        ],
-      });
 
-      mapInstance.addLayer(vectorLayer);
+      useDrawCirlces(mapInstance, mapCircles);
     }
   }, [mapCircles]);
 

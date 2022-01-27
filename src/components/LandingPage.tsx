@@ -2,17 +2,17 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import { IconTabs } from './IconTabs';
 
-import MapComponent from './MapComponent';
-
-import { IconTabInterface } from '../interface/IconTabsInterface';
+import { MapWithLocationWrapper } from './MapWithLocationWrapper';
 
 import { tabs } from '../constants/constants';
 
 import MapInstanceSingleton from '../services/MapInstance';
 
+import { IconTabInterface } from '../interface/IconTabsInterface';
+
 import { Navbar } from '../styles/Navbar.css';
 import { TabsWrapper } from '../styles/IconTabs.css';
-import { MainWrapper, MapContentWrapper } from '../styles/LandingPage.css';
+import { MainWrapper } from '../styles/LandingPage.css';
 
 /**
  * Function holding the component for the landing page.
@@ -58,11 +58,7 @@ export function LandingPage() {
     const extractedTab = tabsInfo.find((tab) => tab.isSelected);
 
     if (extractedTab?.tabIndex === 1) {
-      return (
-        <MapContentWrapper>
-          <MapComponent />
-        </MapContentWrapper>
-      );
+      return <MapWithLocationWrapper />;
     }
 
     if (extractedTab?.tabIndex === 2) {

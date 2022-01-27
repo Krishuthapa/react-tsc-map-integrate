@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { IconTabsInterface } from '../interface/IconTabsInterface';
-
 import { IconTab } from './IconTab';
+
+import { IconTabsInterface } from '../interface/IconTabsInterface';
 
 /**
  * Function corresponding the component for the tabs.

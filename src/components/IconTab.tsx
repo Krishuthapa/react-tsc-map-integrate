@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { IconTabPropInterface } from '../interface/IconTabsInterface';
-
 import { TabContainer, TabIcon } from '../styles/IconTab.css';
+
+import { IconTabPropInterface } from '../interface/IconTabsInterface';
 
 /**
  * Function implementing the component for the individual tab.

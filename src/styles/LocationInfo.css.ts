@@ -5,6 +5,7 @@ import Flag from '../images/flag.svg';
 export const InfoContainer = styled.div`
   display: flex;
   width: 200px;
+  padding: 14px 24px;
   flex-direction: column;
 `;
 

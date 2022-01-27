@@ -1,6 +1,6 @@
-import TabOne from '../images/TabOne.svg';
-import TabTwo from '../images/TabTwo.svg';
-import TabThree from '../images/TabThree.svg';
+import TabOne from '../images/tab-one.svg';
+import TabTwo from '../images/tab-two.svg';
+import TabThree from '../images/tab-three.svg';
 
 export const tabs = [
   { icon: TabOne, isSelected: true, tabIndex: 1 },
