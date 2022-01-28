@@ -25,19 +25,19 @@ export function LocationInfo(props: LocationInfoInterface) {
   return (
     <InfoContainer>
       <HeaderContainer>
-        <FlagIcon />
+        <FlagIcon data-testid="flag-icon" />
         <Title>Location {locationNumber}</Title>
       </HeaderContainer>
 
       <LocationContainer>
         <LocationInfoItem>
           <InfoKey>Lat</InfoKey>
-          <InfoValue>{latitude}</InfoValue>
+          <InfoValue data-testid="latitude-value">{latitude}</InfoValue>
         </LocationInfoItem>
 
         <LocationInfoItem>
           <InfoKey>Long</InfoKey>
-          <InfoValue>{longitude}</InfoValue>
+          <InfoValue data-testid="longitude-value">{longitude}</InfoValue>
         </LocationInfoItem>
       </LocationContainer>
     </InfoContainer>
