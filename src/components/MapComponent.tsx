@@ -59,7 +59,7 @@ function MapComponent(props: MapComponentPropsInterface) {
 
       const mapInstance = getMapInstance(mapDivRef.current);
 
-      useDrawCirlces(mapInstance, mapCircles);
+      useDrawCirlces(mapInstance, mapCircles.locations);
     }
   }, [mapCircles]);
 

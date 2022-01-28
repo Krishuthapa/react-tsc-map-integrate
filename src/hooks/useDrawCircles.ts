@@ -6,7 +6,7 @@ import Vector from 'ol/layer/Vector';
 import { Style, Stroke } from 'ol/style';
 import { Vector as SourceVector } from 'ol/source';
 
-import { MapLocationsInterface } from '../interface/LocationInterface';
+import { isEmpty as isArrayEmpty } from '../utils/array';
 
 /**
  * Hooks for drawing the circle at given map instance at given locations.
@@ -19,17 +19,17 @@ import { MapLocationsInterface } from '../interface/LocationInterface';
  */
 export default function useDrawCirlces(
   mapInstance: Map,
-  mapCircles: MapLocationsInterface,
+  locations: Array<Array<number>>,
   radius: number = 35,
   width: number = 3,
   color: string = '#1572A1'
 ) {
-  if (!mapInstance || !mapCircles) {
+  if (!mapInstance || !locations || isArrayEmpty(locations)) {
     return;
   }
 
   const markers = new SourceVector({
-    features: mapCircles.locations.map(
+    features: locations.map(
       (location) =>
         new Feature(new Circle(fromLonLat(location.reverse()), radius))
     ),
